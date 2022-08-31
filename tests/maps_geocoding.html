@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA Compatible" content="ie-edge">
+    <link rel="stylesheet" type="text/css" href="./sass/vendors/font-awesome/fontawesome-free/css/all.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Nunito:wght@200;300;400&family=Oxygen:wght@300;400&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/post.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
+    <title>The Post App</title>
+    <style>
+        /* Set the size of the div element that contains the map */
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+  /* Optional: Makes the sample page fill the window. */
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;}
+
+#floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: transparent;
+  padding: 5px;
+  /* border: 1px solid #999; */
+  text-align: center;
+  font-family: "Roboto", "sans-serif";
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#floating-panel {
+  width: 400px;
+}
+
+#address {
+  width: 250px;
+}
+    </style>
+
+
+</head>
+<body onload="initialize()">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="./sass/vendors/jquery3.5.0.js"></script>
+    <script src="./js/menuClick.js"></script>
+    <script src="./js/scroll.js"></script>
+    <script src="./js/response.js"></script>
+
+    <script> 
+        var geocoder;
+         var map;
+         function initialize() {
+           geocoder = new google.maps.Geocoder();
+           var latlng = new google.maps.LatLng(50.0000, 10.0000);
+           var mapOptions = {
+             zoom: 4,
+             center: latlng
+           }
+           map = new google.maps.Map(document.getElementById('map'), mapOptions);
+         }
+       
+         function codeAddress() {
+           var address = document.getElementById('address').value;
+           geocoder.geocode( { 'address': address}, function(results, status) {
+             if (status == 'OK') {
+               map.setCenter(results[0].geometry.location);
+               var marker = new google.maps.Marker({
+                   map: map,
+                   position: results[0].geometry.location
+               });
+             } else {
+               alert('Geocode was not successful for the following reason: ' + status);
+             }
+           });
+         }
+             </script>
+
+        <div id="map"></div>
+         <div id="floating-panel">
+           <input id="address" type="textbox" value="Your Address Here">
+           <input type="button" value="Encode" onclick="codeAddress()">
+         </div>
+        
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <!--  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhaQL9_N9e8XiytXnyIJ_45VnTRWsbFSc&callback=initMap&libraries=&v=weekly"
+      async> -->
+    </script> 
+</body>
+</html>
