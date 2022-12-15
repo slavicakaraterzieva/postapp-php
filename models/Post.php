@@ -74,14 +74,14 @@ public function getPostUserInfo($post_id){
     $this->db->query('SELECT * FROM `posts` JOIN `users` ON `posts`.`user_id` = `users`.`user_id` WHERE `posts`.`post_id` = :post_id ORDER BY post_id DESC');
     $this->db->bind(':post_id', $post_id);
     $result =$this->db->single();
-    return $result;
+    return $result;}
   /*   $this->db->query("SELECT DISTINCT posts.post_id AS postId, users.user_id AS user_id 
     FROM posts INNER JOIN users ON posts.user_id = users.user_id
     WHERE posts.post_id = :post_id ORDER BY postId DESC");
     $this->db->bind(':post_id', $post_id);
     $result =$this->db->single();
     return $result;  */
-}
+
 //end of getPostUserInfo
 
 //postData

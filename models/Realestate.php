@@ -54,6 +54,14 @@ public function postCalculatedPrice(){
   } 
   }//end of postCalculatedPrice
 
+   //get realestate function
+   public function getRealEstatePost($post_id){
+    $this->db->query('SELECT * FROM posts, estate WHERE posts.post_id=:post_id AND estate.post_id=:posts_id');
+    $this->db->bind(':post_id', $post_id);
+    $this->db->bind(":posts_id", $post_id);
+    $row=$this->db->single(); 
+    return $row;
+   } 
  }//end of class Realestate
 
 ?>

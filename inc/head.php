@@ -2,10 +2,16 @@
 include "./models/Post.php";
 include "./models/Img.php";
 include "./models/User.php";
+include "./models/Realestate.php";
+include "./models/Job.php";
+include "./models/Category.php";
+
 $post = new Post;
 $img = new Img;
 $user = new User;
-
+$real = new Realestate;
+$job = new Job;
+$cat = new Category;
 if (isset($_GET['pid'])){
  $get=filter_var_array($_GET, FILTER_SANITIZE_STRING);
  $post_id = $_GET['pid'];
@@ -14,10 +20,49 @@ if (isset($_GET['pid'])){
 
 $postInfo = $post->getPostUserInfo($post_id);
 //print_r($postInfo);
+$post_category = $cat->getCategoryName($postInfo->post_cat_id);
+$cat_name = $post_category->category_title;
+//echo $cat_name;
+if($cat_name != "realestate" && $cat_name !=="job" && $cat_name !=="car"){
+  $default_name = $cat_name;
+  $cat_name = "other";
+}
+
+$userOwner = false;
+if(isset($_SESSION["user_id"])){
+  $theUser_id=$_SESSION["user_id"];
+  if($theUser_id==$postInfo->user_id){
+    $userOwner=true;
+  }
+}
+
+switch($cat_name){
+  case "realestate";
+  $realestate=$real->getRealEstatePost($post_id);
+  break;
+
+  case "job";
+  $theJob = $job->getJobByPostId($post_id);
+  //print_r($theJob);
+  break;
+
+  case "car";
+  break;
+
+}
+
 $post_featured_image = trim($postInfo->post_featured_img);
 $image_num = $img-> getPostImages($post_featured_image);
 //echo $image_num;
-$post_featured_image_pieces =$img->getAllImages($post_featured_image);}?>
+$post_featured_image_pieces =$img->getAllImages($post_featured_image);
+}
+else{logInredirect("index.php");}
+
+
+  
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="eng">

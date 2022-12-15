@@ -49,8 +49,8 @@
 
 
 <div class="form-group-contact-agent-message_select">
+<?php if($cat_name =="realestate"):?>
     <label for="email_reason" class="label-style">State Inquiry</label>
-
    <select id="email_reason" name="email_reason" class="form-control select-style">
      <option value="inquire price">Inquire Price</option>
      <option value="place offer">Place Offer</option>
@@ -59,7 +59,7 @@
      <option value="sell">Sell</option>
      <option value="rent">Rent</option>
    </select>
-
+<?php endif?>
   <div class="contact-agent-form-message">
     <label for="message_body" class="label-style">Your message here:</label> 
     <textarea name="message_body" id="message_body" class="textarea" cols="60" rows="3" required></textarea>

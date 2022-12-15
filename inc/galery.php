@@ -35,7 +35,7 @@
             //end of first if it works
              if($image_num == 1){
               echo '<div class="item active">
-                     <img src="./img/posts/'.$post_featured_image_pieces[0].'" alt="first slide">
+                     <img src="../../flexapp/img/posts/'.$post_featured_image_pieces[0].'" alt="first slide">
                    </div>';  
             }//it works
            else{
@@ -43,12 +43,12 @@
             for($i=1; $i<$image_num; $i++){
               if($i == 1){
                 echo '<div class="item active">
-                     <img src="./img/posts/'.$post_featured_image_pieces[0].'" alt="second slide">
+                     <img src="../../flexapp/img/posts/'.$post_featured_image_pieces[0].'" alt="second slide">
                    </div>';
               }
               
               echo '<div class="item">
-                     <img src="./img/posts/'.$post_featured_image_pieces[$i].'" alt="third slide">
+                     <img src="../../flexapp/img/posts/'.$post_featured_image_pieces[$i].'" alt="third slide">
                    </div>';
                    
               } //end of for
@@ -59,20 +59,21 @@
         
            <div class="galery-description">
              <div class="galery-description-heading">
-               Address: <?php echo $postInfo->full_address;?>
+               Address: <?php if(isset($postInfo->full_address)){echo $postInfo->full_address;}?>
+             </div>
+            <?php if($cat_name =="realestate"):?>
+             <div class="galery-description--icons">
+               <i class="fa fa-bed"><span><?php if(isset($realestate->post_property_type)){echo $realestate->post_property_type;} ?></span></i>
              </div>
   
              <div class="galery-description--icons">
-               <i class="fa fa-bed"><span>3</span></i>
-             </div>
-  
-             <div class="galery-description--icons">
-              <i class="fa fa-bath"><span>1</span></i>
+              <i class="fa fa-bath"><span><?php if(isset($realestate->bath)){echo $realestate->bath;} ?></span></i>
             </div>
   
             <div class="galery-description--icons">
-              <i class="fa fa-car"><span>1</span></i>
+              <i class="fa fa-car"><span><?php if(isset($realestate->parking)){echo $realestate->parking;} ?></span></i>
             </div>
+          <?php endif?>
            </div>
 
          </div>
