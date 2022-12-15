@@ -8,7 +8,34 @@
 # Local History for Visual Studio Code
 .history/
 
+
 # Built Visual Studio Code Extensions
 *.vsix
 /config/config.php
-/texts
+/lib
+/css/compiled.css
+/css/concatinated.css
+/node_modules
+/sass/abstracts
+/sass/base
+/sass/components
+/sass/layout
+/sass/pages
+/sass/src
+/sass/themes
+/sass/main.scss
+/sass/sass.bat
+/svg/demo-files
+/svg/fonts
+/svg/PNG
+/svg/SVG
+/svg/demo-external-svg.html
+/svg/demo.html
+/svg/Read Me.txt
+/svg/selection.json
+/svg/style.css
+/svg/svgxuse.js
+/tests
+/package-lock.json
+/package.json
+/snow.html
